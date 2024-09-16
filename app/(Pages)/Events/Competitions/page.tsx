@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import img1 from '../../../../assets/Dance.jpg'
@@ -39,28 +40,30 @@ const CompetitionsPage = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">Competitions</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {competitions.map((competition) => (
-          <Card key={competition.id} className="flex flex-col">
-            <CardHeader>
-              <div className="relative w-full h-48 mb-4">
-                <Image
-                  src={competition.image}
-                  alt={competition.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-t-lg"
-                />
+          <Link href={competition.route} key={competition.id}>
+            <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 hover:scale-102 cursor-pointer">
+              <CardHeader>
+                <div className="relative w-full h-48 mb-4">
+                  <Image
+                    src={competition.image}
+                    alt={competition.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-t-lg"
+                  />
+                </div>
+                <CardTitle>{competition.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="mb-2">{competition.description}</p>
+                <p className="text-sm text-gray-500">Date: {competition.date}</p>
+                <p className="text-sm text-gray-500">Prize: {competition.prize}</p>
+              </CardContent>
+              <div className="p-4 mt-auto">
+                <Button className="w-full">View Details</Button>
               </div>
-              <CardTitle>{competition.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <p className="mb-2">{competition.description}</p>
-              <p className="text-sm text-gray-500">Date: {competition.date}</p>
-              <p className="text-sm text-gray-500">Prize: {competition.prize}</p>
-            </CardContent>
-            <div className="p-4 mt-auto">
-              <Button className="w-full">Register</Button>
-            </div>
-          </Card>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>

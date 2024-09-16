@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -105,28 +106,30 @@ const AllEventsPage = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">All Events</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {allEvents.map((event) => (
-          <Card key={event.id} className="flex flex-col">
-            <CardHeader>
-              <div className="relative w-full h-48 mb-4">
-                <Image
-                  src={event.image}
-                  alt={event.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-t-lg"
-                />
+          <Link href={event.route} key={event.id}>
+            <Card className="flex flex-col h-full cursor-pointer transition-transform hover:scale-105">
+              <CardHeader>
+                <div className="relative w-full h-48 mb-4">
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-t-lg"
+                  />
+                </div>
+                <CardTitle>{event.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="mb-2">{event.description}</p>
+                <p className="text-sm text-gray-500">Date: {event.date}</p>
+                <p className="text-sm text-gray-500">Prize: {event.prize}</p>
+              </CardContent>
+              <div className="p-4 mt-auto">
+                <Button className="w-full">View Details</Button>
               </div>
-              <CardTitle>{event.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <p className="mb-2">{event.description}</p>
-              <p className="text-sm text-gray-500">Date: {event.date}</p>
-              <p className="text-sm text-gray-500">Prize: {event.prize}</p>
-            </CardContent>
-            <div className="p-4 mt-auto">
-              <Button className="w-full">Register</Button>
-            </div>
-          </Card>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>

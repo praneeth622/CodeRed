@@ -12,9 +12,9 @@ import { Calendar, MapPin, Users, ChevronDown, LogOut, Menu, Facebook, Twitter, 
 import image1 from "../../../assets/image.png"
 // Mock data for events
 const events = [
-  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "https://drive.google.com/uc?export=view&id=1ydQ0RK5jv366Xsks5VAiKALb6sSNl90k" },
-  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "https://picsum.photos/200/300" },
-  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: image1 },
+  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/placeholder.svg?height=400&width=600" },
+  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/placeholder.svg?height=400&width=600" },
+  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/placeholder.svg?height=400&width=600" },
   { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/placeholder.svg?height=400&width=600" },
   { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/placeholder.svg?height=400&width=600" },
   { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/placeholder.svg?height=400&width=600" },
@@ -23,7 +23,7 @@ const events = [
 // Mock user data
 const user = {
   name: "John Doe",
-  avatar: "/placeholder.svg?height=32&width=32"
+  avatar: "/assets/avatar.jpg"
 }
 
 export default function EventLandingPage() {
@@ -87,13 +87,10 @@ export default function EventLandingPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem>
-                      <Link href="/About" className="w-full">About Us</Link>
+                      <Link href="/More/About" className="w-full">About Us</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/Faq" className="w-full">FAQ</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href="/Blog" className="w-full">Blog</Link>
+                      <Link href="/More/Faq" className="w-full">FAQ</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -138,15 +135,19 @@ export default function EventLandingPage() {
             </div>
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-4">
-                <div className="flex-shrink-0">
-                  <Avatar>
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                  </Avatar>
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">{user.name}</div>
-                </div>
+                <a href="/Profile">
+                <Link href="/Profile" className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <Avatar>
+                      <AvatarImage src={user.avatar} alt={user.name} />
+                      <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-base font-medium text-gray-800">{user.name}</div>
+                  </div>
+                </Link>
+                </a>
                 <Button variant="ghost" size="sm" className="ml-auto text-gray-500 hover:text-gray-700 transition-colors duration-200">
                   <LogOut className="h-5 w-5" />
                 </Button>
@@ -156,15 +157,41 @@ export default function EventLandingPage() {
         )}
       </nav>
 
-      <div className="bg-cover bg-center h-96 flex items-center justify-center" style={{backgroundImage: 'url("/placeholder.svg?height=800&width=1200")'}}>
-        <div className="text-center text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Discover Amazing Events</h1>
-          <p className="text-xl md:text-2xl mb-8">Find and join exciting events in your area</p>
-          <Button size="lg" className="bg-primary hover:bg-primary-dark text-white">
-            Explore Events
-          </Button>
-        </div>
-      </div>
+      <Carousel className="relative" opts={{ loop: true, align: "start" }}>
+        <CarouselContent>
+          <CarouselItem className="w-48 h-24 relative">
+            <Image
+              src="/images/event-image-2.jpg"
+              alt="Event 1"
+              width={200}
+              height={100}
+              layout="responsive"
+              objectFit="cover"
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <Image
+              src="/images/event-image-2.jpg"
+              alt="Event 2"
+              width={800}
+              height={300}
+              layout="responsive"
+              objectFit="cover"
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <Image
+              src="/images/event-image-3.jpg"
+              alt="Event 3"
+              width={800}
+              height={300}
+              layout="responsive"
+              objectFit="cover"
+            />
+          </CarouselItem>
+        </CarouselContent>
+      </Carousel>
+
 
       <div className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -195,32 +222,33 @@ export default function EventLandingPage() {
           <div className="px-4 py-6 sm:px-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredAndSortedEvents.map(event => (
-                <Card 
-                  key={event.id} 
-                  className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 hover:scale-102 overflow-hidden"
-                >
-                  <div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${event.image})`}} role="img" aria-label={`${event.name} event image`}></div>
-                  <CardHeader>
-                    <CardTitle>{event.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="flex items-center text-sm text-gray-500 mb-2">
-                      <Calendar className="mr-2 h-4 w-4" />
-                      {new Date(event.date).toLocaleDateString('en-GB')}
-                    </p>
-                    <p className="flex items-center text-sm text-gray-500 mb-2">
-                      <MapPin className="mr-2 h-4 w-4" />
-                      {event.location}
-                    </p>
-                    <p className="flex items-center text-sm text-gray-500">
-                      <Users className="mr-2 h-4 w-4" />
-                      {event.attendees} attendees
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button className="w-full">Register</Button>
-                  </CardFooter>
-                </Card>
+                <Link href={event.route} key={event.id}>
+                  <Card 
+                    className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 hover:scale-102 overflow-hidden cursor-pointer"
+                  >
+                    <div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${event.image})`}} role="img" aria-label={`${event.name} event image`}></div>
+                    <CardHeader>
+                      <CardTitle>{event.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="flex items-center text-sm text-gray-500 mb-2">
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {new Date(event.date).toLocaleDateString('en-GB')}
+                      </p>
+                      <p className="flex items-center text-sm text-gray-500 mb-2">
+                        <MapPin className="mr-2 h-4 w-4" />
+                        {event.location}
+                      </p>
+                      <p className="flex items-center text-sm text-gray-500">
+                        <Users className="mr-2 h-4 w-4" />
+                        {event.attendees} attendees
+                      </p>
+                    </CardContent>
+                    <CardFooter>
+                      <Button className="w-full">Register</Button>
+                    </CardFooter>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>
@@ -238,15 +266,15 @@ export default function EventLandingPage() {
               <h3 className="text-lg font-semibold text-gray-900">Quick Links</h3>
               <ul className="space-y-2">
                 <li><Link href="/" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Home</Link></li>
-                <li><Link href="/events" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">All Events</Link></li>
-                <li><Link href="/contact" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Contact</Link></li>
-                <li><Link href="/merchandise" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Merchandise</Link></li>
+                <li><Link href="/Events" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">All Events</Link></li>
+                <li><Link href="/Contact" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Contact</Link></li>
+                <li><Link href="/Merchandise" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Merchandise</Link></li>
               </ul>
             </div>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900">Support</h3>
               <ul className="space-y-2">
-                <li><Link href="/faq" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">FAQ</Link></li>
+                <li><Link href="/More/Faq" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">FAQ</Link></li>
                 <li><Link href="/terms" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Terms of Service</Link></li>
                 <li><Link href="/privacy" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Privacy Policy</Link></li>
               </ul>

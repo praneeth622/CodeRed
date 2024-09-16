@@ -54,30 +54,32 @@ export default function EventLandingPage() {
                 <span className="text-2xl font-bold text-primary">Event Organizer</span>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <NavLink href="/" active={false}>Home</NavLink>
+                <NavLink href="/" active={true}>Home</NavLink>
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 border-primary text-gray-900">
+                  <DropdownMenuTrigger className="inline-flex items-center px-1 pt-1  text-sm font-medium transition-colors duration-200 border-primary text-gray-900">
                     Events <ChevronDown className="ml-1 h-4 w-4" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem>
-                      <Link href="/events/festivals" className="w-full">Festivals</Link>
+                      <Link href="/Events/Festivals" className="w-full">Festivals</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/events/workshops" className="w-full">Workshops</Link>
+                      <Link href="/Events/Workshops" className="w-full">Workshops</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/events/performances" className="w-full">Performances</Link>
+                      <Link href="/Events/Performances" className="w-full">Performances</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/events/competitions" className="w-full">Competitions</Link>
+                      <Link href="/Events/Competitions" className="w-full">Competitions</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/events" className="w-full">All Events</Link>
+                      <Link href="/Events" className="w-full">All Events</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                <NavLink href="/contact" active={false}>Contact</NavLink>
+
+                <NavLink href="/Contact" active={false}>Contact</NavLink>
+
                 <NavLink href="/Merchandise" active={false}>Merchandise</NavLink>
                 <DropdownMenu>
                   <DropdownMenuTrigger className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200">
@@ -85,13 +87,13 @@ export default function EventLandingPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem>
-                      <Link href="/about" className="w-full">About Us</Link>
+                      <Link href="/About" className="w-full">About Us</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/faq" className="w-full">FAQ</Link>
+                      <Link href="/Faq" className="w-full">FAQ</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/blog" className="w-full">Blog</Link>
+                      <Link href="/Blog" className="w-full">Blog</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -120,17 +122,19 @@ export default function EventLandingPage() {
         {mobileMenuOpen && (
           <div className="sm:hidden">
             <div className="pt-2 pb-3 space-y-1">
-              <MobileNavLink href="/" active={false}>Home</MobileNavLink>
-              <MobileNavLink href="/events" active={true}>All Events</MobileNavLink>
-              <MobileNavLink href="/events/festivals" active={false}>Festivals</MobileNavLink>
-              <MobileNavLink href="/events/workshops" active={false}>Workshops</MobileNavLink>
-              <MobileNavLink href="/events/performances" active={false}>Performances</MobileNavLink>
-              <MobileNavLink href="/events/competitions" active={false}>Competitions</MobileNavLink>
-              <MobileNavLink href="/contact" active={false}>Contact</MobileNavLink>
-              <MobileNavLink href="/merchandise" active={false}>Merchandise</MobileNavLink>
-              <MobileNavLink href="/about" active={false}>About Us</MobileNavLink>
-              <MobileNavLink href="/faq" active={false}>FAQ</MobileNavLink>
-              <MobileNavLink href="/blog" active={false}>Blog</MobileNavLink>
+              <MobileNavLink href="/" active={true}>
+                <span className="underline">Home</span>
+              </MobileNavLink>
+              <MobileNavLink href="/Events" active={false}>All Events</MobileNavLink>
+              <MobileNavLink href="/Events/Festivals" active={false}>Festivals</MobileNavLink>
+              <MobileNavLink href="/Events/Workshops" active={false}>Workshops</MobileNavLink>
+              <MobileNavLink href="/Events/Performances" active={false}>Performances</MobileNavLink>
+              <MobileNavLink href="/Events/Competitions" active={false}>Competitions</MobileNavLink>
+              <MobileNavLink href="/Contact" active={false}>Contact</MobileNavLink>
+              <MobileNavLink href="/Merchandise" active={false}>Merchandise</MobileNavLink>
+              <MobileNavLink href="/About" active={false}>About Us</MobileNavLink>
+              <MobileNavLink href="/Faq" active={false}>FAQ</MobileNavLink>
+              <MobileNavLink href="/Blog" active={false}>Blog</MobileNavLink>
             </div>
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-4">
@@ -290,6 +294,7 @@ function NavLink({ href, active, children }: { href: string, active: boolean, ch
     >
       {children}
     </Link>
+
   )
 }
 

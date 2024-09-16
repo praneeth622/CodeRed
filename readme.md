@@ -1,1 +1,2 @@
-This is vit hackathon Project
+This is Vit hackathon Project
+//College Fest Management Website

@@ -6,13 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -39,12 +32,36 @@ const loadRazorpayScript = () => {
   });
 };
 
-// Mock data; replace this with actual data fetching
+// Mock product data; this would be fetched dynamically in a real scenario
 const products = [
-  { id: '1', name: 'Festival T-Shirt', description: 'Comfortable and stylish festival t-shirt.', price: 299, image: 'https://picsum.photos/200' },
-  { id: '2', name: 'Festival Cap', description: 'Cool cap for festival-goers.', price: 149, image: 'https://picsum.photos/200' },
-  { id: '3', name: 'Festival Mug', description: 'Mug for your festival drinks.', price: 99, image: 'https://picsum.photos/200' },
-  { id: '4', name: 'Festival Hoodie', description: 'Warm hoodie for cool festival nights.', price: 599, image: 'https://picsum.photos/200' },
+  {
+    id: '1',
+    name: 'Festival T-Shirt',
+    description: 'Comfortable and stylish festival t-shirt.',
+    price: 299,
+    image: 'https://picsum.photos/200',
+  },
+  {
+    id: '2',
+    name: 'Festival Cap',
+    description: 'Cool cap for festival-goers.',
+    price: 149,
+    image: 'https://picsum.photos/200',
+  },
+  {
+    id: '3',
+    name: 'Festival Mug',
+    description: 'Mug for your festival drinks.',
+    price: 99,
+    image: 'https://picsum.photos/200',
+  },
+  {
+    id: '4',
+    name: 'Festival Hoodie',
+    description: 'Warm hoodie for cool festival nights.',
+    price: 599,
+    image: 'https://picsum.photos/200',
+  },
 ];
 
 export default function ProductDetail() {
@@ -55,24 +72,12 @@ export default function ProductDetail() {
     address: "",
     pincode: "",
   });
-  const { id } = useParams();
-  const product = products.find((p) => p.id === id);
-
-  // Currency exchange rates
   
+  const { id } = useParams(); // Use next/navigation's useParams to get the product id from the route
+  const product = products.find((p) => p.id === id);
 
   const { user } = useUser();
   const userId = user?.emailAddresses[0]?.emailAddress || "Unknown User";
-
-  // Format currency based on the selected currency
-  const formatCurrency = (amount: number, currency: string) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(amount);
-  };
 
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,9 +85,7 @@ export default function ProductDetail() {
     setFormData({ ...formData, [id]: value });
   };
 
-  
-
-  // Handle form submission (integrated with Razorpay)
+  // Razorpay integration
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const isRazorpayLoaded = await loadRazorpayScript();
@@ -92,22 +95,25 @@ export default function ProductDetail() {
       return;
     }
 
-    let amount = 0
+    // Assuming the amount is the product price; Razorpay expects the amount in paise
+    const amount = product?.price ? product.price * 100 : 0;
 
     try {
       const options = {
-        key: "rzp_test_7kbetSV9IQQW2J",
-        amount: amount * 100, // Razorpay expects the amount in paise
+        key: "rzp_test_7kbetSV9IQQW2J", // Your Razorpay test key
+        amount: amount,
         currency: "INR",
         name: "Artly",
-        description: "Purchase",
+        description: `Purchase of ${product?.name}`,
         handler: function (response: any) {
+          // Handle payment response
           const paymentResponse = {
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             razorpay_signature: response.razorpay_signature,
           };
-          // Handle payment response here
+          console.log("Payment successful:", paymentResponse);
+          // You can further handle the payment success (e.g., save it in a database)
         },
         theme: {
           color: "#000000",
@@ -122,12 +128,13 @@ export default function ProductDetail() {
   };
 
   if (!product) {
-    return <p className="text-center text-xl font-bold">Product not found</p>; // Handle product not found case
+    return <p className="text-center text-xl font-bold">Product not found</p>;
   }
 
   return (
     <div className="container mx-auto px-4 py-8 bg-white min-h-screen">
       <div className="grid md:grid-cols-2 gap-8 items-start">
+        {/* Product Image */}
         <div className="relative aspect-square overflow-hidden rounded-lg bg-black">
           <Image
             src={product.image}
@@ -137,12 +144,14 @@ export default function ProductDetail() {
             className="w-full h-full"
           />
         </div>
+        
+        {/* Product Info */}
         <div className="flex flex-col gap-4 text-black">
           <h1 className="text-4xl font-extrabold">{product.name}</h1>
           <p className="text-lg text-gray-700">{product.description}</p>
-          <div className="grid gap-4">
-            <h2 className="text-2xl font-semibold">Price:{product.price}</h2>
-          </div>
+          <h2 className="text-2xl font-semibold">Price: ₹{product.price}</h2>
+
+          {/* Purchase Dialog */}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button className="w-full md:w-auto bg-black text-white hover:bg-gray-800" size="lg">
@@ -153,6 +162,8 @@ export default function ProductDetail() {
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold text-black">Complete Your Purchase</DialogTitle>
               </DialogHeader>
+
+              {/* Purchase Form */}
               <form onSubmit={handleSubmit} className="grid gap-6 py-4">
                 <div className="grid gap-2">
                   <Label htmlFor="name" className="font-semibold text-gray-800">Name</Label>
@@ -195,14 +206,13 @@ export default function ProductDetail() {
                     className="border-gray-300 focus:border-black"
                   />
                 </div>
-                
 
-
-                <Button type="submit" className="bg-black text-white hover:bg-gray-800">Complete Purchase</Button>
+                <Button type="submit" className="bg-black text-white hover:bg-gray-800">
+                  Complete Purchase
+                </Button>
               </form>
             </DialogContent>
           </Dialog>
-
         </div>
       </div>
     </div>

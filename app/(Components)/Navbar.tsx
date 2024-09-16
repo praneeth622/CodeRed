@@ -9,11 +9,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, SignInButton, useUser } from '@clerk/clerk-react';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const user = { name: 'John Doe', avatar: '/path/to/avatar.jpg' }; // Replace with actual user data or context
+  const { isSignedIn, user } = useUser();
 
   return (
     <div>
@@ -82,26 +83,25 @@ const Navbar = () => {
               <Link href="/CreateEvent" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200">
                 <PlusCircle className="h-5 w-5" />
               </Link>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <span className="text-sm font-medium text-gray-500 mr-2">Hello, {user.name}</span>
-                  </div>
-                  <Avatar>
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="mt-2 p-2 bg-white border rounded shadow-lg">
-                  <DropdownMenuItem>
-                    <Link href="/Profile" className="block w-full px-4 py-2 text-sm">Profile</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Button variant="ghost" size="sm" className="ml-2 text-gray-500 hover:text-gray-700 transition-colors duration-200">
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
+              {isSignedIn && user && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex items-center">
+                    <div className="flex-shrink-0">
+                      <span className="text-sm font-medium text-gray-500 mr-2">
+                        Hello, {user.fullName || user.firstName}
+                      </span>
+                    </div>
+                    <UserButton />
+                  </DropdownMenuTrigger>
+                </DropdownMenu>
+              )}
+              <SignedOut>
+                <Link href="/auth/sign-in">
+                  <Button className="bg-black text-white hover:bg-gray-800">
+                    Login
+                  </Button>
+                </Link>
+              </SignedOut>
             </div>
             <div className="flex items-center sm:hidden">
               <Button variant="ghost" size="sm" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -149,17 +149,21 @@ const Navbar = () => {
             </div>
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-4">
-                <Link href="/Profile" className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <Avatar>
-                      <AvatarImage src={user.avatar} alt={user.name} />
-                      <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                  </div>
+                {isSignedIn && user && (
                   <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">{user.name}</div>
+                    <div className="text-base font-medium text-gray-800">{user.fullName || user.firstName}</div>
                   </div>
-                </Link>
+                )}
+                <SignedIn>
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <Button variant="ghost" size="sm">
+                      Sign In
+                    </Button>
+                  </SignInButton>
+                </SignedOut>
                 <Button variant="ghost" size="sm" className="ml-auto text-gray-500 hover:text-gray-700 transition-colors duration-200">
                   <LogOut className="h-5 w-5" />
                 </Button>

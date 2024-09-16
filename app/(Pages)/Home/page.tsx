@@ -78,7 +78,7 @@ export default function EventLandingPage() {
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <NavLink href="/contact" active={false}>Contact</NavLink>
-                <NavLink href="/merchandise" active={false}>Merchandise</NavLink>
+                <NavLink href="/Merchandise" active={false}>Merchandise</NavLink>
                 <DropdownMenu>
                   <DropdownMenuTrigger className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200">
                     More <ChevronDown className="ml-1 h-4 w-4" />
@@ -290,7 +290,6 @@ function NavLink({ href, active, children }: { href: string, active: boolean, ch
     >
       {children}
     </Link>
- is Home Page</div>
   )
 }
 

@@ -14,18 +14,18 @@ import { Carousel ,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious} f
 
 // Mock data for events
 const events = [
-  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/1" },
-  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Workshops/2" },
-  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/3" },
-  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/placeholder.svg?height=400&width=600", route: "/Events/Performances/4" },
-  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Performances/5" },
-  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/6" },
+  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/assets/Summer.jpg", route: "/Events/Festivals/1" },
+  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/assets/Tech.jpg", route: "/Events/Workshops/2" },
+  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/assets/Food.jpg", route: "/Events/Festivals/3" },
+  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/assets/Art.jpg", route: "/Events/Performances/4" },
+  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/assets/Marathon.jpg", route: "/Events/Performances/5" },
+  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/assets/Winter.jpg", route: "/Events/Festivals/6" },
 ]
 
 // Mock user data
 const user = {
   name: "John Doe",
-  avatar: "/placeholder.svg?height=32&width=32"
+  avatar: "/assets/avatar.jpg"
 }
 
 export default function EventLandingPage() {
@@ -54,7 +54,7 @@ export default function EventLandingPage() {
         <CarouselContent>
           <CarouselItem className="w-48 h-24 relative">
             <Image
-              src="/images/event-image-2.jpg"
+              src="/assets/Summer.jpg"
               alt="Event 1"
               width={200}
               height={100}
@@ -64,7 +64,7 @@ export default function EventLandingPage() {
           </CarouselItem>
           <CarouselItem>
             <Image
-              src="/images/event-image-2.jpg"
+              src="/assets/Tech.jpg"
               alt="Event 2"
               width={800}
               height={300}
@@ -74,7 +74,7 @@ export default function EventLandingPage() {
           </CarouselItem>
           <CarouselItem>
             <Image
-              src="/images/event-image-3.jpg"
+              src="/assets/Food.jpg"
               alt="Event 3"
               width={800}
               height={300}

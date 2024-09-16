@@ -14,12 +14,12 @@ import { Carousel ,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious} f
 
 // Mock data for events
 const events = [
-  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/placeholder.svg?height=400&width=600" },
-  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/placeholder.svg?height=400&width=600" },
+  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/1" },
+  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Workshops/2" },
+  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/3" },
+  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/placeholder.svg?height=400&width=600", route: "/Events/Performances/4" },
+  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Performances/5" },
+  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/6" },
 ]
 
 // Mock user data
@@ -48,116 +48,7 @@ export default function EventLandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
-      <nav className="bg-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <span className="text-2xl font-bold text-primary">Event Organizer</span>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <NavLink href="/" active={true}>Home</NavLink>
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="inline-flex items-center px-1 pt-1  text-sm font-medium transition-colors duration-200 border-primary text-gray-900">
-                    Events <ChevronDown className="ml-1 h-4 w-4" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem>
-                      <Link href="/Events/Festivals" className="w-full">Festivals</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href="/Events/Workshops" className="w-full">Workshops</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href="/Events/Performances" className="w-full">Performances</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href="/Events/Competitions" className="w-full">Competitions</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href="/Events" className="w-full">All Events</Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-
-                <NavLink href="/Contact" active={false}>Contact</NavLink>
-
-                <NavLink href="/Merchandise" active={false}>Merchandise</NavLink>
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200">
-                    More <ChevronDown className="ml-1 h-4 w-4" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem>
-                      <Link href="/More/About" className="w-full">About Us</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href="/More/Faq" className="w-full">FAQ</Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
-            <div className="hidden sm:flex items-center">
-              <div className="flex-shrink-0">
-                <span className="text-sm font-medium text-gray-500 mr-2">Hello, {user.name}</span>
-              </div>
-              <Avatar>
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-              </Avatar>
-              <Button variant="ghost" size="sm" className="ml-2 text-gray-500 hover:text-gray-700 transition-colors duration-200">
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
-            </div>
-            <div className="flex items-center sm:hidden">
-              <Button variant="ghost" size="sm" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                <Menu className="h-6 w-6" />
-              </Button>
-            </div>
-          </div>
-        </div>
-        {mobileMenuOpen && (
-          <div className="sm:hidden">
-            <div className="pt-2 pb-3 space-y-1">
-              <MobileNavLink href="/" active={true}>
-                <span className="underline">Home</span>
-              </MobileNavLink>
-              <MobileNavLink href="/Events" active={false}>All Events</MobileNavLink>
-              <MobileNavLink href="/Events/Festivals" active={false}>Festivals</MobileNavLink>
-              <MobileNavLink href="/Events/Workshops" active={false}>Workshops</MobileNavLink>
-              <MobileNavLink href="/Events/Performances" active={false}>Performances</MobileNavLink>
-              <MobileNavLink href="/Events/Competitions" active={false}>Competitions</MobileNavLink>
-              <MobileNavLink href="/Contact" active={false}>Contact</MobileNavLink>
-              <MobileNavLink href="/Merchandise" active={false}>Merchandise</MobileNavLink>
-              <MobileNavLink href="/About" active={false}>About Us</MobileNavLink>
-              <MobileNavLink href="/Faq" active={false}>FAQ</MobileNavLink>
-              <MobileNavLink href="/Blog" active={false}>Blog</MobileNavLink>
-            </div>
-            <div className="pt-4 pb-3 border-t border-gray-200">
-              <div className="flex items-center px-4">
-                <a href="/Profile">
-                <Link href="/Profile" className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <Avatar>
-                      <AvatarImage src={user.avatar} alt={user.name} />
-                      <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">{user.name}</div>
-                  </div>
-                </Link>
-                </a>
-                <Button variant="ghost" size="sm" className="ml-auto text-gray-500 hover:text-gray-700 transition-colors duration-200">
-                  <LogOut className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
+     
 
       <Carousel className="relative" opts={{ loop: true, align: "start" }}>
         <CarouselContent>
@@ -224,32 +115,33 @@ export default function EventLandingPage() {
           <div className="px-4 py-6 sm:px-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredAndSortedEvents.map(event => (
-                <Card 
-                  key={event.id} 
-                  className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 hover:scale-102 overflow-hidden"
-                >
-                  <div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${event.image})`}} role="img" aria-label={`${event.name} event image`}></div>
-                  <CardHeader>
-                    <CardTitle>{event.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="flex items-center text-sm text-gray-500 mb-2">
-                      <Calendar className="mr-2 h-4 w-4" />
-                      {new Date(event.date).toLocaleDateString('en-GB')}
-                    </p>
-                    <p className="flex items-center text-sm text-gray-500 mb-2">
-                      <MapPin className="mr-2 h-4 w-4" />
-                      {event.location}
-                    </p>
-                    <p className="flex items-center text-sm text-gray-500">
-                      <Users className="mr-2 h-4 w-4" />
-                      {event.attendees} attendees
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button className="w-full">Register</Button>
-                  </CardFooter>
-                </Card>
+                <Link href={event.route} key={event.id}>
+                  <Card 
+                    className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 hover:scale-102 overflow-hidden cursor-pointer"
+                  >
+                    <div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${event.image})`}} role="img" aria-label={`${event.name} event image`}></div>
+                    <CardHeader>
+                      <CardTitle>{event.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="flex items-center text-sm text-gray-500 mb-2">
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {new Date(event.date).toLocaleDateString('en-GB')}
+                      </p>
+                      <p className="flex items-center text-sm text-gray-500 mb-2">
+                        <MapPin className="mr-2 h-4 w-4" />
+                        {event.location}
+                      </p>
+                      <p className="flex items-center text-sm text-gray-500">
+                        <Users className="mr-2 h-4 w-4" />
+                        {event.attendees} attendees
+                      </p>
+                    </CardContent>
+                    <CardFooter>
+                      <Button className="w-full">Register</Button>
+                    </CardFooter>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>

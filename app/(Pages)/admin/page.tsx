@@ -1,8 +1,7 @@
-// components/AdminDashboard.tsx
+import React from 'react'
 import Link from 'next/link';
 import { Button } from '@mui/material';
-
-export default function AdminDashboard() {
+export default function page() {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold">Admin Dashboard</h1>
@@ -24,5 +23,5 @@ export default function AdminDashboard() {
         </Link>
       </div>
     </div>
-  );
+  )
 }

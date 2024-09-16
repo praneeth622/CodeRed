@@ -87,13 +87,10 @@ export default function EventLandingPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem>
-                      <Link href="/About" className="w-full">About Us</Link>
+                      <Link href="/More/About" className="w-full">About Us</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link href="/Faq" className="w-full">FAQ</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href="/Blog" className="w-full">Blog</Link>
+                      <Link href="/More/Faq" className="w-full">FAQ</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -138,15 +135,19 @@ export default function EventLandingPage() {
             </div>
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-4">
-                <div className="flex-shrink-0">
-                  <Avatar>
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                  </Avatar>
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">{user.name}</div>
-                </div>
+                <a href="/Profile">
+                <Link href="/Profile" className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <Avatar>
+                      <AvatarImage src={user.avatar} alt={user.name} />
+                      <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div className="ml-3">
+                    <div className="text-base font-medium text-gray-800">{user.name}</div>
+                  </div>
+                </Link>
+                </a>
                 <Button variant="ghost" size="sm" className="ml-auto text-gray-500 hover:text-gray-700 transition-colors duration-200">
                   <LogOut className="h-5 w-5" />
                 </Button>

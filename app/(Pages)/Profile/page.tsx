@@ -37,7 +37,7 @@ export default function Component() {
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-3xl">
+    <div className="container mx-auto p-6 max-w-3xl ">
       <Card className="mb-6">
         <CardHeader className="flex flex-row items-center gap-4">
           <Avatar className="h-20 w-20">

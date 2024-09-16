@@ -2,6 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import img1 from '../../../../assets/Cultural.jpg'
+import img2 from '../../../../assets/Food.jpg'
 
 const festivals = [
   {
@@ -10,7 +12,7 @@ const festivals = [
     description: "Experience a vibrant celebration of different cultures!",
     date: "August 18, 2023",
     prize: "₹20,000",
-    image: "/images/cultural-festival.jpg"
+    image: img1
   },
   {
     id: 2,
@@ -18,7 +20,7 @@ const festivals = [
     description: "Enjoy a variety of cuisines from across the globe!",
     date: "August 19, 2023",
     prize: "₹5,000",
-    image: "/images/food-festival.jpg"
+    image: img2
   }
 ]
 

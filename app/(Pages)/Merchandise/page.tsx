@@ -3,31 +3,34 @@ import { useRouter } from 'next/navigation'; // Import useRouter from Next.js
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-
+import img1 from '../../../assets/dummy1.jpg'
+import img2 from '../../../assets/dummy2.jpg'
+import img3 from '../../../assets/dummy3.jpg'
+import img4 from '../../../assets/dumy4.jpg'
 const products = [
   {
     id: 1,
     name: 'Festival T-Shirt',
     price: 299,
-    image: '/images/festival-tshirt.svg',
+    image: img1,
   },
   {
     id: 2,
     name: 'Festival Cap',
     price: 149,
-    image: '/images/festival-cap.svg',
+    image: img2,
   },
   {
     id: 3,
     name: 'Festival Mug',
     price: 99,
-    image: '/images/festival-mug.svg',
+    image: img3,
   },
   {
     id: 4,
     name: 'Festival Hoodie',
     price: 599,
-    image: '/images/festival-hoodie.svg',
+    image: img4,
   },
 ];
 

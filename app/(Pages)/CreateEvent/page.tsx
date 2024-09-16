@@ -27,6 +27,7 @@ export default function EventForm() {
   }
 
   return (
+    
     <Card className="w-full max-w-2xl mx-auto mt-10">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">Create New Event</CardTitle>

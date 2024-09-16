@@ -14,12 +14,12 @@ import { Carousel ,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious} f
 
 // Mock data for events
 const events = [
-  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/placeholder.svg?height=400&width=600" },
-  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/placeholder.svg?height=400&width=600" },
-  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/placeholder.svg?height=400&width=600" },
+  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/1" },
+  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Workshops/2" },
+  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/3" },
+  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/placeholder.svg?height=400&width=600", route: "/Events/Performances/4" },
+  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/placeholder.svg?height=400&width=600", route: "/Events/Performances/5" },
+  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/placeholder.svg?height=400&width=600", route: "/Events/Festivals/6" },
 ]
 
 // Mock user data
@@ -224,32 +224,33 @@ export default function EventLandingPage() {
           <div className="px-4 py-6 sm:px-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredAndSortedEvents.map(event => (
-                <Card 
-                  key={event.id} 
-                  className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 hover:scale-102 overflow-hidden"
-                >
-                  <div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${event.image})`}} role="img" aria-label={`${event.name} event image`}></div>
-                  <CardHeader>
-                    <CardTitle>{event.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="flex items-center text-sm text-gray-500 mb-2">
-                      <Calendar className="mr-2 h-4 w-4" />
-                      {new Date(event.date).toLocaleDateString('en-GB')}
-                    </p>
-                    <p className="flex items-center text-sm text-gray-500 mb-2">
-                      <MapPin className="mr-2 h-4 w-4" />
-                      {event.location}
-                    </p>
-                    <p className="flex items-center text-sm text-gray-500">
-                      <Users className="mr-2 h-4 w-4" />
-                      {event.attendees} attendees
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button className="w-full">Register</Button>
-                  </CardFooter>
-                </Card>
+                <Link href={event.route} key={event.id}>
+                  <Card 
+                    className="transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 hover:scale-102 overflow-hidden cursor-pointer"
+                  >
+                    <div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${event.image})`}} role="img" aria-label={`${event.name} event image`}></div>
+                    <CardHeader>
+                      <CardTitle>{event.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="flex items-center text-sm text-gray-500 mb-2">
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {new Date(event.date).toLocaleDateString('en-GB')}
+                      </p>
+                      <p className="flex items-center text-sm text-gray-500 mb-2">
+                        <MapPin className="mr-2 h-4 w-4" />
+                        {event.location}
+                      </p>
+                      <p className="flex items-center text-sm text-gray-500">
+                        <Users className="mr-2 h-4 w-4" />
+                        {event.attendees} attendees
+                      </p>
+                    </CardContent>
+                    <CardFooter>
+                      <Button className="w-full">Register</Button>
+                    </CardFooter>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>

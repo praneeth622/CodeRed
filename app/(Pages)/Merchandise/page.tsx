@@ -6,26 +6,26 @@ const products = [
   {
     id: 1,
     name: 'Festival T-Shirt',
-    price: 19.99,
-    image: '/images/festival-tshirt.svg', // Use actual image URLs
+    price: 299,
+    image: '/images/festival-tshirt.svg',
   },
   {
     id: 2,
     name: 'Festival Cap',
-    price: 14.99,
-    image: '/images/festival-cap.svg', // Use actual image URLs
+    price: 149,
+    image: '/images/festival-cap.svg',
   },
   {
     id: 3,
     name: 'Festival Mug',
-    price: 9.99,
-    image: '/images/festival-mug.svg', // Use actual image URLs
+    price: 99,
+    image: '/images/festival-mug.svg',
   },
   {
     id: 4,
     name: 'Festival Hoodie',
-    price: 39.99,
-    image: '/images/festival-hoodie.svg', // Use actual image URLs
+    price: 599,
+    image: '/images/festival-hoodie.svg',
   },
 ];
 
@@ -35,7 +35,10 @@ export default function StorePage() {
       <h1 className="text-3xl font-bold mb-8 text-center">Festival Merchandise</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <Card key={product.id} className="flex flex-col items-center text-center">
+          <Card 
+            key={product.id} 
+            className="flex flex-col items-center text-center transition-transform transform hover:scale-105"
+          >
             <CardHeader>
               <div className="relative w-full h-64">
                 <Image
@@ -48,10 +51,10 @@ export default function StorePage() {
             </CardHeader>
             <CardContent className="flex-1">
               <CardTitle className="text-lg font-semibold">{product.name}</CardTitle>
-              <p className="mt-2 text-xl font-bold">${product.price.toFixed(2)}</p>
+              <p className="mt-2 text-xl font-bold">₹{product.price.toFixed(2)}</p>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Add to Cart</Button>
+              <Button className="w-full">View</Button>
             </CardFooter>
           </Card>
         ))}

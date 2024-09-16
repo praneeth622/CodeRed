@@ -290,6 +290,7 @@ function NavLink({ href, active, children }: { href: string, active: boolean, ch
     >
       {children}
     </Link>
+ is Home Page</div>
   )
 }
 

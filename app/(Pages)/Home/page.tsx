@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Calendar, MapPin, Users, ChevronDown, LogOut, Menu, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+import { Carousel ,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious} from '@/components/ui/carousel'
 
 // Mock data for events
 const events = [
@@ -157,15 +159,41 @@ export default function EventLandingPage() {
         )}
       </nav>
 
-      <div className="bg-cover bg-center h-96 flex items-center justify-center" style={{backgroundImage: 'url("/placeholder.svg?height=800&width=1200")'}}>
-        <div className="text-center text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Discover Amazing Events</h1>
-          <p className="text-xl md:text-2xl mb-8">Find and join exciting events in your area</p>
-          <Button size="lg" className="bg-primary hover:bg-primary-dark text-white">
-            Explore Events
-          </Button>
-        </div>
-      </div>
+      <Carousel className="relative" opts={{ loop: true, align: "start" }}>
+        <CarouselContent>
+          <CarouselItem className="w-48 h-24 relative">
+            <Image
+              src="/images/event-image-2.jpg"
+              alt="Event 1"
+              width={200}
+              height={100}
+              layout="responsive"
+              objectFit="cover"
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <Image
+              src="/images/event-image-2.jpg"
+              alt="Event 2"
+              width={800}
+              height={300}
+              layout="responsive"
+              objectFit="cover"
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <Image
+              src="/images/event-image-3.jpg"
+              alt="Event 3"
+              width={800}
+              height={300}
+              layout="responsive"
+              objectFit="cover"
+            />
+          </CarouselItem>
+        </CarouselContent>
+      </Carousel>
+
 
       <div className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -239,15 +267,15 @@ export default function EventLandingPage() {
               <h3 className="text-lg font-semibold text-gray-900">Quick Links</h3>
               <ul className="space-y-2">
                 <li><Link href="/" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Home</Link></li>
-                <li><Link href="/events" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">All Events</Link></li>
-                <li><Link href="/contact" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Contact</Link></li>
-                <li><Link href="/merchandise" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Merchandise</Link></li>
+                <li><Link href="/Events" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">All Events</Link></li>
+                <li><Link href="/Contact" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Contact</Link></li>
+                <li><Link href="/Merchandise" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Merchandise</Link></li>
               </ul>
             </div>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-900">Support</h3>
               <ul className="space-y-2">
-                <li><Link href="/faq" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">FAQ</Link></li>
+                <li><Link href="/More/Faq" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">FAQ</Link></li>
                 <li><Link href="/terms" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Terms of Service</Link></li>
                 <li><Link href="/privacy" className="text-sm text-gray-600 hover:text-primary transition-colors duration-200">Privacy Policy</Link></li>
               </ul>

@@ -54,18 +54,12 @@ export default function ProductDetail() {
     phone: "",
     address: "",
     pincode: "",
-    currency: "INR",
   });
-  const [currency, setCurrency] = useState<string>("INR");
   const { id } = useParams();
   const product = products.find((p) => p.id === id);
 
   // Currency exchange rates
-  const exchangeRates = {
-    INR: 83.25,
-    USD: 1,
-    EUR: 0.92,
-  };
+  
 
   const { user } = useUser();
   const userId = user?.emailAddresses[0]?.emailAddress || "Unknown User";
@@ -86,11 +80,7 @@ export default function ProductDetail() {
     setFormData({ ...formData, [id]: value });
   };
 
-  // Handle currency selection change
-  const handleCurrencyChange = (value: string) => {
-    setFormData({ ...formData, currency: value });
-    setCurrency(value);
-  };
+  
 
   // Handle form submission (integrated with Razorpay)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -98,18 +88,17 @@ export default function ProductDetail() {
     const isRazorpayLoaded = await loadRazorpayScript();
 
     if (!isRazorpayLoaded) {
-      // Handle error if Razorpay script fails to load
       console.error("Razorpay SDK failed to load. Please try again later.");
       return;
     }
 
-    let amount = 0;
-    // Here you need to calculate the amount based on the selected currency
+    let amount = 0
+
     try {
       const options = {
         key: "rzp_test_7kbetSV9IQQW2J",
-        amount: amount,
-        currency: formData.currency,
+        amount: amount * 100, // Razorpay expects the amount in paise
+        currency: "INR",
         name: "Artly",
         description: "Purchase",
         handler: function (response: any) {
@@ -121,7 +110,7 @@ export default function ProductDetail() {
           // Handle payment response here
         },
         theme: {
-          color: "#3399cc",
+          color: "#000000",
         },
       };
 
@@ -133,13 +122,13 @@ export default function ProductDetail() {
   };
 
   if (!product) {
-    return <p>Product not found</p>; // Handle product not found case
+    return <p className="text-center text-xl font-bold">Product not found</p>; // Handle product not found case
   }
 
   return (
     <div className="container mx-auto px-4 py-8 bg-white min-h-screen">
       <div className="grid md:grid-cols-2 gap-8 items-start">
-        <div className="aspect-square relative overflow-hidden rounded-lg bg-gray-100">
+        <div className="relative aspect-square overflow-hidden rounded-lg bg-black">
           <Image
             src={product.image}
             alt={product.name}
@@ -148,96 +137,72 @@ export default function ProductDetail() {
             className="w-full h-full"
           />
         </div>
-        <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-bold tracking-tight">{product.name}</h1>
-          <p className="text-gray-500">{product.description}</p>
-          <div className="grid gap-2">
-            <h2 className="text-xl font-semibold">Price:</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {Object.keys(exchangeRates).map((currency) => (
-                <div
-                  key={currency}
-                  className="flex flex-col items-center p-4 bg-gray-100 rounded-lg"
-                >
-                  <span className="text-sm font-medium text-gray-500">
-                    {currency}
-                  </span>
-                  <span className="text-2xl font-bold">
-                    {formatCurrency(product.price * exchangeRates[currency], currency)}
-                  </span>
-                </div>
-              ))}
-            </div>
+        <div className="flex flex-col gap-4 text-black">
+          <h1 className="text-4xl font-extrabold">{product.name}</h1>
+          <p className="text-lg text-gray-700">{product.description}</p>
+          <div className="grid gap-4">
+            <h2 className="text-2xl font-semibold">Price:{product.price}</h2>
           </div>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="w-full md:w-auto" size="lg">
+              <Button className="w-full md:w-auto bg-black text-white hover:bg-gray-800" size="lg">
                 Buy Now
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] bg-white">
               <DialogHeader>
-                <DialogTitle>Complete Your Purchase</DialogTitle>
+                <DialogTitle className="text-2xl font-bold text-black">Complete Your Purchase</DialogTitle>
               </DialogHeader>
-              <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+              <form onSubmit={handleSubmit} className="grid gap-6 py-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name" className="font-semibold text-gray-800">Name</Label>
                   <Input
                     id="name"
                     required
                     value={formData.name}
                     onChange={handleInputChange}
+                    className="border-gray-300 focus:border-black"
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="phone">Phone Number</Label>
+                  <Label htmlFor="phone" className="font-semibold text-gray-800">Phone Number</Label>
                   <Input
                     id="phone"
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
+                    className="border-gray-300 focus:border-black"
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="address">Address</Label>
+                  <Label htmlFor="address" className="font-semibold text-gray-800">Address</Label>
                   <Input
                     id="address"
                     required
                     value={formData.address}
                     onChange={handleInputChange}
+                    className="border-gray-300 focus:border-black"
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="pincode">Pincode</Label>
+                  <Label htmlFor="pincode" className="font-semibold text-gray-800">Pincode</Label>
                   <Input
                     id="pincode"
                     required
                     value={formData.pincode}
                     onChange={handleInputChange}
+                    className="border-gray-300 focus:border-black"
                   />
                 </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="currency">Preferred Currency</Label>
-                  <Select
-                    required
-                    value={formData.currency}
-                    onValueChange={handleCurrencyChange}
-                  >
-                    <SelectTrigger id="currency">
-                      <SelectValue placeholder="Select currency" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="INR">INR</SelectItem>
-                      <SelectItem value="USD">USD</SelectItem>
-                      <SelectItem value="EUR">EUR</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button type="submit">Complete Purchase</Button>
+                
+
+
+                <Button type="submit" className="bg-black text-white hover:bg-gray-800">Complete Purchase</Button>
               </form>
             </DialogContent>
           </Dialog>
+
         </div>
       </div>
     </div>

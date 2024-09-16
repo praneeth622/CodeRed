@@ -43,8 +43,32 @@ export default function EventForm() {
             <Textarea id="description" placeholder="Enter event description" required />
           </div>
 
+          <div className="space-y-4">
+            <Label htmlFor="type" className="text-lg font-semibold">Type of Event</Label>
+            <div className="grid grid-cols-2 gap-4">
+              {['Festivals', 'Competitions', 'Performance', 'Workshop'].map((eventType) => (
+                <div key={eventType} className="relative">
+                  <input
+                    type="radio"
+                    id={eventType.toLowerCase()}
+                    name="eventType"
+                    value={eventType.toLowerCase()}
+                    className="peer sr-only"
+                    required
+                  />
+                  <label
+                    htmlFor={eventType.toLowerCase()}
+                    className="flex items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-50 peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary"
+                  >
+                    {eventType}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="space-y-2">
-            <Label htmlFor="eventName">Price</Label>
+            <Label htmlFor="price">Price</Label>
             <Input id="price" placeholder="Enter price" required />
           </div>
           

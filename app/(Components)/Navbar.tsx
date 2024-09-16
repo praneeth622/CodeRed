@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, LogOut, Menu } from 'lucide-react';
+import { ChevronDown, LogOut, Menu, Bell, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -22,7 +22,9 @@ const Navbar = () => {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <span className="text-2xl font-bold text-primary">Event Organizer</span>
+                <Link href="/">
+                  <span className="text-2xl font-bold text-primary cursor-pointer">Event Organizer</span>
+                </Link>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <Link href="/" className="inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors duration-200 border-b-2 border-primary text-gray-900">
@@ -71,14 +73,31 @@ const Navbar = () => {
                 </DropdownMenu>
               </div>
             </div>
-            <div className="hidden sm:flex items-center">
-              <div className="flex-shrink-0">
-                <span className="text-sm font-medium text-gray-500 mr-2">Hello, {user.name}</span>
-              </div>
-              <Avatar>
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-              </Avatar>
+            <div className="hidden sm:flex items-center space-x-4">
+              {/* Notifications Icon */}
+              <Link href="/Notifications" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200">
+                <Bell className="h-5 w-5" />
+              </Link>
+              {/* Create Event Icon */}
+              <Link href="/CreateEvent" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors duration-200">
+                <PlusCircle className="h-5 w-5" />
+              </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <span className="text-sm font-medium text-gray-500 mr-2">Hello, {user.name}</span>
+                  </div>
+                  <Avatar>
+                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="mt-2 p-2 bg-white border rounded shadow-lg">
+                  <DropdownMenuItem>
+                    <Link href="/Profile" className="block w-full px-4 py-2 text-sm">Profile</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Button variant="ghost" size="sm" className="ml-2 text-gray-500 hover:text-gray-700 transition-colors duration-200">
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout

@@ -7,6 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { CalendarDays, CreditCard, Package } from 'lucide-react'
+import { useUser } from '@clerk/nextjs'
+import Image from 'next/image'
 
 // Mock data for demonstration
 const userData = {
@@ -29,6 +31,7 @@ const userData = {
 
 export default function Component() {
   const [activeTab, setActiveTab] = useState("registrations")
+  const user = useUser()
 
   const tabVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -40,13 +43,13 @@ export default function Component() {
     <div className="container mx-auto p-6 max-w-3xl ">
       <Card className="mb-6">
         <CardHeader className="flex flex-row items-center gap-4">
-          <Avatar className="h-20 w-20">
-            <AvatarImage src={userData.avatar} alt={userData.name} />
-            <AvatarFallback>{userData.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-          </Avatar>
+        <Avatar className="h-20 w-20">
+          <AvatarImage src={user.user?.imageUrl} alt="User Avatar" />
+          <AvatarFallback>{user.user?.firstName?.charAt(0)}</AvatarFallback>
+        </Avatar>
           <div>
-            <CardTitle>{userData.name}</CardTitle>
-            <CardDescription>{userData.email}</CardDescription>
+            <CardTitle>{user.user?.fullName}</CardTitle>
+            <CardDescription>{user.user?.emailAddresses[0].emailAddress}</CardDescription>
           </div>
         </CardHeader>
       </Card>

@@ -11,15 +11,18 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Calendar, MapPin, Users, ChevronDown, LogOut, Menu, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { Carousel ,CarouselContent,CarouselItem,CarouselNext,CarouselPrevious} from '@/components/ui/carousel'
-
+import image from '../../../assets/image.png'
+import image1 from '../../../assets/Summer.jpg'
+import image2 from '../../../assets/Stage.jpg'
+import image3 from '../../../assets/Music1.jpg'
 // Mock data for events
 const events = [
-  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "/assets/Summer.jpg", route: "/Events/Festivals/1" },
-  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "/assets/Tech.jpg", route: "/Events/Workshops/2" },
-  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "/assets/Food.jpg", route: "/Events/Festivals/3" },
-  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "/assets/Art.jpg", route: "/Events/Performances/4" },
-  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "/assets/Marathon.jpg", route: "/Events/Performances/5" },
-  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "/assets/Winter.jpg", route: "/Events/Festivals/6" },
+  { id: 1, name: "Summer Music Festival", date: "2023-07-15", location: "Central Park", attendees: 5000, image: "https://picsum.photos/200/300", route: "/Events/Festivals/1" },
+  { id: 2, name: "Tech Conference 2023", date: "2023-08-22", location: "Convention Center", attendees: 2000, image: "https://picsum.photos/200", route: "/Events/Workshops/2" },
+  { id: 3, name: "Food & Wine Expo", date: "2023-09-10", location: "City Hall", attendees: 3000, image: "https://picsum.photos/200/300", route: "/Events/Festivals/3" },
+  { id: 4, name: "Art Gallery Opening", date: "2023-10-05", location: "Downtown Museum", attendees: 500, image: "https://picsum.photos/200", route: "/Events/Performances/4" },
+  { id: 5, name: "Marathon 2023", date: "2023-11-12", location: "City Streets", attendees: 10000, image: "https://picsum.photos/200/300", route: "/Events/Performances/5" },
+  { id: 6, name: "Winter Wonderland", date: "2023-12-20", location: "City Square", attendees: 7500, image: "https://picsum.photos/200", route: "/Events/Festivals/6" },
 ]
 
 // Mock user data
@@ -54,7 +57,7 @@ export default function EventLandingPage() {
         <CarouselContent>
           <CarouselItem className="w-48 h-24 relative">
             <Image
-              src="/assets/Summer.jpg"
+              src={image}
               alt="Event 1"
               width={200}
               height={100}
@@ -64,7 +67,7 @@ export default function EventLandingPage() {
           </CarouselItem>
           <CarouselItem>
             <Image
-              src="/assets/Tech.jpg"
+              src={image1}
               alt="Event 2"
               width={800}
               height={300}
@@ -74,7 +77,7 @@ export default function EventLandingPage() {
           </CarouselItem>
           <CarouselItem>
             <Image
-              src="/assets/Food.jpg"
+              src={image2}
               alt="Event 3"
               width={800}
               height={300}
@@ -94,10 +97,10 @@ export default function EventLandingPage() {
               placeholder="Search events..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full sm:w-64"
+              className="w-full sm:w-64 text-black"
             />
             <Select value={sortOrder} onValueChange={setSortOrder}>
-              <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px] text-black">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>

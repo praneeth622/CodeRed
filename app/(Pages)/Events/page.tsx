@@ -4,6 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import image1 from '../../assets/Summer.jpg'
+import image2 from '../../assets/7451204.jpg'
+import image3 from '../../assets/athlete-silhouette-marathon-h2u2efp37ylfcv9f.jpg'
 
 // Define the types for the event data
 interface Event {
@@ -36,7 +39,7 @@ const AllEventsPage: React.FC = () => {
         } else {
           throw new Error(data.error || 'Failed to fetch events');
         }
-      } catch (error) {
+      } catch (error:any) {
         setError(error.message); // Set error state
       } finally {
         setLoading(false); // Stop loading once request is completed
@@ -62,7 +65,7 @@ const AllEventsPage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">All Events</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event) => (
-          <Link href={`/events/${event.id}`} key={event.id}>
+          <Link href={`/Events/${event.id}`} key={event.id}>
             <Card className="flex flex-col h-full cursor-pointer transition-transform hover:scale-105">
               <CardHeader>
                 <div className="relative w-full h-48 mb-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useParams } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // Load Razorpay SDK
 const loadRazorpayScript = () => {
@@ -32,52 +33,40 @@ const loadRazorpayScript = () => {
   });
 };
 
-// Mock product data; this would be fetched dynamically in a real scenario
-const products = [
-  {
-    id: '1',
-    name: 'Festival T-Shirt',
-    description: 'Comfortable and stylish festival t-shirt.',
-    price: 299,
-    image: 'https://picsum.photos/200',
-  },
-  {
-    id: '2',
-    name: 'Festival Cap',
-    description: 'Cool cap for festival-goers.',
-    price: 149,
-    image: 'https://picsum.photos/200',
-  },
-  {
-    id: '3',
-    name: 'Festival Mug',
-    description: 'Mug for your festival drinks.',
-    price: 99,
-    image: 'https://picsum.photos/200',
-  },
-  {
-    id: '4',
-    name: 'Festival Hoodie',
-    description: 'Warm hoodie for cool festival nights.',
-    price: 599,
-    image: 'https://picsum.photos/200',
-  },
-];
-
 export default function ProductDetail() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [product, setProduct] = useState<any>(null); // Product state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     address: "",
     pincode: "",
   });
-  
-  const { id } = useParams(); // Use next/navigation's useParams to get the product id from the route
-  const product = products.find((p) => p.id === id);
 
-  const { user } = useUser();
-  const userId = user?.emailAddresses[0]?.emailAddress || "Unknown User";
+  const { id } = useParams(); // Use next/navigation's useParams to get the product id from the route
+
+  // Fetch product details from API
+  useEffect(() => {
+    const fetchProduct = async () => {
+      console.log('Id is :',id)
+      try {
+        const res = await fetch(`/api/merchandise/${id}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch product details.");
+        }
+        const data = await res.json();
+        setProduct(data);
+      } catch (error:any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +92,7 @@ export default function ProductDetail() {
         key: "rzp_test_7kbetSV9IQQW2J", // Your Razorpay test key
         amount: amount,
         currency: "INR",
-        name: "Artly",
+        name: "Event Oragniser",
         description: `Purchase of ${product?.name}`,
         handler: function (response: any) {
           // Handle payment response
@@ -113,7 +102,7 @@ export default function ProductDetail() {
             razorpay_signature: response.razorpay_signature,
           };
           console.log("Payment successful:", paymentResponse);
-          // You can further handle the payment success (e.g., save it in a database)
+          toast.success("paymentResponse successful")
         },
         theme: {
           color: "#000000",
@@ -127,6 +116,14 @@ export default function ProductDetail() {
     }
   };
 
+  if (loading) {
+    return <p className="text-center">Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="text-center text-red-500">{error}</p>;
+  }
+
   if (!product) {
     return <p className="text-center text-xl font-bold">Product not found</p>;
   }
@@ -135,7 +132,7 @@ export default function ProductDetail() {
     <div className="container mx-auto px-4 py-8 bg-white min-h-screen">
       <div className="grid md:grid-cols-2 gap-8 items-start">
         {/* Product Image */}
-        <div className="relative aspect-square overflow-hidden rounded-lg bg-black">
+        <div className="relative aspect-square overflow-hidden rounded-lg ">
           <Image
             src={product.image}
             alt={product.name}
@@ -154,7 +151,7 @@ export default function ProductDetail() {
           {/* Purchase Dialog */}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="w-full md:w-auto bg-black text-white hover:bg-gray-800" size="lg">
+              <Button className="w-full md:w-auto  text-white hover:bg-gray-800" size="lg">
                 Buy Now
               </Button>
             </DialogTrigger>
@@ -207,12 +204,13 @@ export default function ProductDetail() {
                   />
                 </div>
 
-                <Button type="submit" className="bg-black text-white hover:bg-gray-800">
+                <Button type="submit" className="bg-white text-black hover:bg-gray-800">
                   Complete Purchase
                 </Button>
               </form>
             </DialogContent>
           </Dialog>
+          <ToastContainer/>
         </div>
       </div>
     </div>

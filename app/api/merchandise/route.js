@@ -5,9 +5,11 @@ import Merchandise from '../../models/Merchandise';
 export async function GET() {
   await dbConnect();
   try {
-    const merchandises = await Merchandise.find({});
-    return new Response(JSON.stringify({ success: true, data: merchandises }), { status: 200 });
-  } catch (error) {
+    const merchandise = await Merchandise.find({});
+    return new Response(JSON.stringify(merchandise), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });} catch (error) {
     return new Response(JSON.stringify({ success: false, error: error.message }), { status: 400 });
   }
 }
@@ -15,6 +17,12 @@ export async function GET() {
 // POST: Add new merchandise
 export async function POST(req) {
   const body = await req.json();
+  if (!body.name || !body.price || !body.image || !body.category) {
+    return new Response(JSON.stringify({
+      success: false,
+      error: "All fields (name, price, image, category) are required."
+    }), { status: 400 });
+  }
   await dbConnect();
   try {
     const newMerchandise = new Merchandise(body);

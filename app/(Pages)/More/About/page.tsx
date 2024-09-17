@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Calendar, MapPin, Music, Star, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import image from '../../../assets/image.png' 
 
 export default function AboutPage() {
   const fadeIn = {
@@ -29,7 +30,7 @@ export default function AboutPage() {
         className="relative h-screen"
       >
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src={image}
           alt="Festival Image"
           layout="fill"
           objectFit="cover"
@@ -110,7 +111,7 @@ export default function AboutPage() {
               variants={fadeIn}
             >
               <span className="text-indigo-600">{item.icon}</span>
-              <span>{item.text}</span>
+              <span className='text-black'>{item.text}</span>
             </motion.li>
           ))}
         </motion.ul>
@@ -141,7 +142,7 @@ export default function AboutPage() {
             >
               <div className="flex-shrink-0 w-32 text-right font-semibold text-indigo-600">{item.date}</div>
               <div className="w-px h-4 bg-indigo-300"></div>
-              <div>{item.event}</div>
+              <div className='text-black'>{item.event}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -155,7 +156,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row items-center justify-between">
             <div className="flex items-center space-x-2 mb-4 sm:mb-0">
               <Calendar className="w-6 h-6 text-indigo-600" />
-              <span className="font-semibold">March 15-19, 2023</span>
+              <span className="font-semibold text-black">March 15-19, 2023</span>
             </div>
             <motion.button
               className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300"

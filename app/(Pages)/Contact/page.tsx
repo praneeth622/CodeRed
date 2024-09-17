@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Phone, Mail, Linkedin } from 'lucide-react'
+import imag1 from '../../assets/man1.jpg'
 
 const ContactPage = () => {
   const coordinators = [

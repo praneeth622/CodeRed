@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +11,7 @@ import { Phone, Mail, Linkedin } from 'lucide-react';
 import img1 from '../../../assets/man1.jpg';
 import img2 from '../../../assets/man2.jpg';
 import img3 from '../../../assets/man3.jpg';
+
 
 const ContactPage = () => {
   const coordinators = [

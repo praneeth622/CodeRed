@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Calendar, MapPin, Music, Star, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import image from '../../../assets/image.png' 
 
 export default function AboutPage() {
   const fadeIn = {
@@ -29,7 +30,9 @@ export default function AboutPage() {
         className="relative h-screen"
       >
         <Image
-          src="https://picsum.photos/200/300"
+
+          src={image}
+
           alt="Festival Image"
           layout="fill"
           objectFit="cover"
@@ -119,8 +122,10 @@ export default function AboutPage() {
               className="flex items-center space-x-3 bg-blue-50 p-4 rounded-lg shadow-md"
               variants={fadeIn}
             >
-              <span>{item.icon}</span>
-              <span className="text-gray-700">{item.text}</span>
+
+              <span className="text-indigo-600">{item.icon}</span>
+              <span className='text-black'>{item.text}</span>
+
             </motion.li>
           ))}
         </motion.ul>
@@ -159,9 +164,11 @@ export default function AboutPage() {
               className="flex items-center space-x-4"
               variants={fadeIn}
             >
-              <div className="flex-shrink-0 w-32 text-right font-semibold text-blue-600">{item.date}</div>
-              <div className="w-px h-4 bg-blue-300"></div>
-              <div className="text-gray-700">{item.event}</div>
+
+              <div className="flex-shrink-0 w-32 text-right font-semibold text-indigo-600">{item.date}</div>
+              <div className="w-px h-4 bg-indigo-300"></div>
+              <div className='text-black'>{item.event}</div>
+
             </motion.div>
           ))}
         </motion.div>
@@ -174,8 +181,10 @@ export default function AboutPage() {
         >
           <div className="flex flex-col sm:flex-row items-center justify-between">
             <div className="flex items-center space-x-2 mb-4 sm:mb-0">
-              <Calendar className="w-6 h-6 text-blue-600" />
-              <span className="font-semibold text-gray-700">March 15-19, 2023</span>
+
+              <Calendar className="w-6 h-6 text-indigo-600" />
+              <span className="font-semibold text-black">March 15-19, 2023</span>
+
             </div>
             <motion.button
               className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"

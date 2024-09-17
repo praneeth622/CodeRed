@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import img1 from '../../../../assets/Dance.jpg'
+import img2 from '../../../../assets/song.jpg'
+import img3 from '../../../../assets/Art.jpg'
 
 const competitions = [
   {
@@ -11,8 +14,7 @@ const competitions = [
     description: "Show off your best moves in this exciting dance competition!",
     date: "August 15, 2023",
     prize: "₹10,000",
-    image: "/images/dance-competition.jpg",
-    route: "/Events/Competitions/1"
+    image: img1
   },
   {
     id: 2,
@@ -20,8 +22,7 @@ const competitions = [
     description: "Let your voice shine in our annual singing contest!",
     date: "August 16, 2023",
     prize: "₹15,000",
-    image: "/images/singing-contest.jpg",
-    route: "/Events/Competitions/2"
+    image: img2
   },
   {
     id: 3,
@@ -29,8 +30,7 @@ const competitions = [
     description: "Display your artistic talents and compete for the top prize!",
     date: "August 17, 2023",
     prize: "₹12,000",
-    image: "/images/art-exhibition.jpg",
-    route: "/Events/Competitions/3"
+    image: img3
   }
 ]
 

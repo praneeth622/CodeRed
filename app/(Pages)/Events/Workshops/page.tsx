@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import img1 from '../../../../assets/painting.jpg'
+import img2 from '../../../../assets/Photography.jpg'
 
 const workshops = [
   {
@@ -11,8 +13,7 @@ const workshops = [
     description: "Learn the art of photography from professionals.",
     date: "August 22, 2023",
     prize: "₹7,000",
-    image: "/images/photography-workshop.jpg",
-    route: "/Events/Workshops/6"
+    image: img2
   },
   {
     id: 2,
@@ -20,8 +21,7 @@ const workshops = [
     description: "Improve your painting skills with hands-on sessions.",
     date: "August 23, 2023",
     prize: "₹6,000",
-    image: "/images/painting-workshop.jpg",
-    route: "/Events/Workshops/2"
+    image: img1
   }
 ]
 

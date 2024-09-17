@@ -52,6 +52,7 @@ const AllEventsPage: React.FC = () => {
   // Render loading state
   if (loading) {
     return <div className="text-center">Loading events...</div>;
+
   }
 
   // Render error state

@@ -3,7 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-
+import img1 from '../../../../assets/Stage.jpg'
+import img2 from '../../../../assets/Music1.jpg'
 const performances = [
   {
     id: 1,
@@ -11,8 +12,7 @@ const performances = [
     description: "Watch a captivating stage performance by talented artists.",
     date: "August 20, 2023",
     prize: "₹8,000",
-    image: "/images/stage-drama.jpg",
-    route: "/events/performances/stage-drama"
+    image: img1
   },
   {
     id: 2,
@@ -20,8 +20,7 @@ const performances = [
     description: "Enjoy live performances by various music bands.",
     date: "August 21, 2023",
     prize: "₹12,000",
-    image: "/images/music-performance.jpg",
-    route: "/events/performances/music-performance"
+    image: img2
   }
 ]
 
